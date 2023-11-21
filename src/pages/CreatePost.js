@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db, auth } from "../firebase-config";
@@ -8,18 +9,25 @@ import { faFeather } from "@fortawesome/free-solid-svg-icons";
 function CreatePost({ isAuth }) {
   const [postText, setPostText] = useState("");
   const [createdAt, setCreatedAt] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   const postsCollectionRef = collection(db, "posts");
   let navigate = useNavigate();
 
   const createPost = async () => {
-    const docRef = await addDoc(postsCollectionRef, {
-      postText,
-      author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
-      createdAt: serverTimestamp(),
-    });
-    setCreatedAt(docRef.id); // Salva a ID do documento para referência futura se necessário
-    navigate("/");
+    try {
+      const docRef = await addDoc(postsCollectionRef, {
+        postText,
+        author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
+        createdAt: serverTimestamp(),
+      });
+      setCreatedAt(docRef.id);
+      setSuccessMessage("Post criado com sucesso!");
+      navigate("/");
+    } catch (error) {
+      console.error("Erro ao criar post:", error.message);
+      setSuccessMessage("Erro ao criar post. Por favor, tente novamente.");
+    }
   };
 
   useEffect(() => {
@@ -48,6 +56,7 @@ function CreatePost({ isAuth }) {
             Post criado em: {new Date(createdAt).toLocaleString()}
           </p>
         )}
+        {successMessage && <p style={{ marginTop: "10px", color: "#4CAF50" }}>{successMessage}</p>}
       </div>
     </div>
   );

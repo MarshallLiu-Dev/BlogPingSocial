@@ -56,7 +56,7 @@ function Dashboard() {
 
     return (
         <div className="dashboard">
-            <h1>Dashboard</h1>
+            <h1>Posts</h1>
             <div className="postList">
                 {postList.map((post) => (
                     <div className="post" key={post.id}>

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import './App.css';
@@ -11,7 +12,17 @@ import { signOut } from 'firebase/auth';
 import { auth } from './firebase-config';
 import Profile from './pages/Profile';
 import About from './pages/About';
+import PostDetails from './pages/PostDetails';
+import AdminPage from './pages/AdminPage';
+import CommentDashboard from './pages/CommentDashboard';
 
+
+import logoMible from './img/logo.jpg';
+import logo from './img/IMG_4473.JPG'
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCloud } from "@fortawesome/free-solid-svg-icons";
+import ExplorePage from './pages/ExplorePage';
 
 
 function App() {
@@ -45,20 +56,28 @@ function App() {
   return (
     <Router>
       <nav className="navigation">
-        <a href="/" className="brand-name">
-          <span className="letterp">P</span>
+        
+        {/* <a href="/" className="brand-name">
+          <span className="letterP">P</span>
           <span className="letteri">i</span>
-          <span className="lettern">n</span>
-          <span className="letterg">g</span>
-          <span className="letter">.</span>
-          <span className="letterp">S</span>
-          <span className="letteri">o</span>
-          <span className="lettern">c</span>
-          <span className="letterg">i</span>
-          <span className="letterp">a</span>
-          <span className="letteri">l</span>
-          
+          <span className="letterN">n</span>
+          <span className="letterG">g</span>
+          <span className="letter">{" "}</span>
+          <span className="letterS">S</span>
+          <span className="letterO">o</span>
+          <span className="letterC">c</span>
+          <span className="letterI">i</span>
+          <span className="letterA">a</span>
+          <span className="letterL">L</span>
+        </a> */}
 
+
+        <a href="/" className="brand-name-mobile">
+          <img src={logo} alt="logo" />
+        </a>
+
+        <a href="/" className="brand-name">
+          <img src={logo} alt="logo" />
         </a>
 
         <button
@@ -88,8 +107,11 @@ function App() {
             <li>
               {isAuth && <Link to="/createpost">Postar</Link>}
             </li>
+            {/* <li>
+              {isAuth && <Link to="/explorar">Explorar</Link>}
+            </li> */}
             <li>
-              {isAuth && <Link to="/dashboard">Dashboard</Link>}
+              {isAuth && <Link to="/editpage">Dashboard</Link>}
             </li>
             <li>
               {isAuth && <Link to="/perfil">Perfil</Link>}
@@ -104,14 +126,12 @@ function App() {
               {!isAuth ? (
                 <Link to="/login">Login</Link>
               ) : (
-                <>
-                    <button class="button" onClick={signUserOut}>
-                      <svg class="bell" viewBox="0 0 448 512"></svg>
-                      Sair
-                      <div class="arrow">›</div>
-                    </button>
-                </>
+                <></>
               )}
+            </li>
+            <li>
+              {isAuth && <Link to="/" onClick={signUserOut}>Sair</Link>}
+              
             </li>
           </ul>
         </div>
@@ -120,12 +140,18 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
         <Route path="/createpost" element={<CreatePost />} />
+        <Route path="/explorar" element={<ExplorePage />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/editpage" element={<AdminPage />} />
+        <Route path="/editcomments" element={<CommentDashboard />} />
         <Route path="/perfil" element={<Profile />} />
         <Route path="/about" element={<About />} />
+        <Route path="/post/:postId" element={<PostDetails />} />
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
+
