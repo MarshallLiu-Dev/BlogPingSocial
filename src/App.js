@@ -3,26 +3,28 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import CreatePost from './pages/CreatePost';
-import Dashboard from './pages/Dashboard'
+
 import { useState, useEffect } from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from './firebase-config';
-import Profile from './pages/Profile';
-import About from './pages/About';
+
+import Profile from './components/Profile';
+import About from './components/About';
 import PostDetails from './pages/PostDetails';
 import AdminPage from './pages/AdminPage';
-import CommentDashboard from './pages/CommentDashboard';
-
+import CommentDashboard from './components/CommentDashboard';
+import Home from './pages/Home';
+import Login from './components/Login';
+import CreatePost from './components/CreatePost';
+import Dashboard from './components/Dashboard'
+import ExplorePage from './components/ExplorePage';
 
 import logoMible from './img/logo.jpg';
 import logo from './img/IMG_4473.JPG'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloud } from "@fortawesome/free-solid-svg-icons";
-import ExplorePage from './pages/ExplorePage';
+
 
 
 function App() {

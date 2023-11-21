@@ -2,8 +2,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 import React, { useState } from "react";
-import CommentDashboard from "./CommentDashboard";
-import PostDashboard from "./Dashboard";
+import CommentDashboard from "../components/CommentDashboard";
+import PostDashboard from "../components/Dashboard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFeather, faCode, faComment, faCamera } from "@fortawesome/free-solid-svg-icons";
 
